@@ -27,14 +27,19 @@ kartzap
 │       │   │   │   │   │   └── route.ts
 │       │   │   │   │   └── signup
 │       │   │   │   │       └── route.ts
+│       │   │   │   ├── checkout
+│       │   │   │   │   └── route.ts
 │       │   │   │   ├── prices
 │       │   │   │   │   └── route.ts
 │       │   │   │   ├── products
 │       │   │   │   │   ├── list
 │       │   │   │   │   │   └── route.ts
 │       │   │   │   │   └── route.ts
-│       │   │   │   └── public
-│       │   │   │       └── products
+│       │   │   │   ├── public
+│       │   │   │   │   └── products
+│       │   │   │   │       └── route.ts
+│       │   │   │   └── webhooks
+│       │   │   │       └── stripe
 │       │   │   │           └── route.ts
 │       │   │   ├── favicon.ico
 │       │   │   ├── globals.css

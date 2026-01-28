@@ -72,3 +72,19 @@
 
 ### 0.5.3 Public Catalog
 - Public products API with prices and organization info
+
+## [0.6.0] - Payments (Stripe)
+
+### 0.6.1 Stripe Integration
+- Added Stripe SDK
+- Configured environment keys
+
+### 0.6.2 Checkout Flow
+- Create checkout session API
+- Generate Stripe hosted checkout
+
+### 0.6.3 Webhooks
+- Stripe webhook endpoint
+- Create order, invoice, and payment on success
+
+
