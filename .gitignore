@@ -1,0 +1,29 @@
+# Node
+node_modules
+
+# Builds
+dist
+out
+.next
+
+# Env
+.env
+.env.*
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode
+.idea
+
+# Coverage
+coverage
+
+# Prisma local db (if ever used)
+*.db
+*.db-journal

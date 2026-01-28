@@ -1,0 +1,18 @@
+# Node
+node_modules
+
+# Next.js
+.next
+out
+dist
+
+# Env
+.env
+.env.*
+
+# Logs
+*.log
+
+# Prisma local db
+*.db
+*.db-journal

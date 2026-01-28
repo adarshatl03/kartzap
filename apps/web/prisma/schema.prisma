@@ -1,0 +1,208 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  ADMIN
+  MEMBER
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  CANCELED
+  PAUSED
+  PAST_DUE
+}
+
+enum PaymentStatus {
+  PENDING
+  SUCCESS
+  FAILED
+}
+
+model User {
+  id          String       @id @default(uuid())
+  email       String       @unique
+  password    String
+  name        String?
+  memberships Membership[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model Organization {
+  id          String       @id @default(uuid())
+  name        String
+  memberships Membership[]
+  products    Product[]
+  customers   Customer[]
+  orders      Order[]
+  invoices    Invoice[]
+  auditLogs   AuditLog[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model Membership {
+  id             String @id @default(uuid())
+  userId         String
+  organizationId String
+  role           Role
+
+  user         User         @relation(fields: [userId], references: [id])
+  organization Organization @relation(fields: [organizationId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, organizationId])
+}
+
+model Product {
+  id                String  @id @default(uuid())
+  organizationId    String
+  name              String
+  externalProductId String?
+  isActive          Boolean @default(true)
+  description       String?
+  prices            Price[]
+  orders            Order[]
+
+  organization Organization @relation(fields: [organizationId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([organizationId])
+}
+
+model Price {
+  id              String  @id @default(uuid())
+  productId       String
+  amount          Int
+  currency        String
+  interval        String? // month, year, one-time
+  externalPriceId String?
+  isActive        Boolean @default(true)
+
+  subscriptions Subscription[]
+
+  product Product @relation(fields: [productId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([productId])
+}
+
+model Customer {
+  id             String         @id @default(uuid())
+  organizationId String
+  email          String
+  name           String?
+  subscriptions  Subscription[]
+  orders         Order[]
+  isActive       Boolean        @default(true)
+
+  externalCustomerId String?
+
+  organization Organization @relation(fields: [organizationId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([organizationId])
+}
+
+model Subscription {
+  id                     String             @id @default(uuid())
+  customerId             String
+  priceId                String
+  status                 SubscriptionStatus
+  externalSubscriptionId String?
+
+  customer Customer @relation(fields: [customerId], references: [id])
+  price    Price    @relation(fields: [priceId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([customerId])
+  @@index([priceId])
+}
+
+model Order {
+  id             String @id @default(uuid())
+  organizationId String
+  customerId     String
+  productId      String
+  totalAmount    Int
+  currency       String
+
+  customer     Customer     @relation(fields: [customerId], references: [id])
+  product      Product      @relation(fields: [productId], references: [id])
+  organization Organization @relation(fields: [organizationId], references: [id])
+  invoice      Invoice?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([organizationId])
+  @@index([customerId])
+}
+
+model Invoice {
+  id             String    @id @default(uuid())
+  organizationId String
+  orderId        String    @unique
+  invoiceNumber  String
+  totalAmount    Int
+  pdfUrl         String?
+  payments       Payment[]
+  currency       String
+
+  organization Organization @relation(fields: [organizationId], references: [id])
+  order        Order        @relation(fields: [orderId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([organizationId, invoiceNumber])
+  @@index([organizationId])
+}
+
+model Payment {
+  id                String        @id @default(uuid())
+  invoiceId         String
+  amount            Int
+  status            PaymentStatus
+  provider          String
+  externalPaymentId String?
+
+  invoice Invoice @relation(fields: [invoiceId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([invoiceId])
+}
+
+model AuditLog {
+  id             String @id @default(uuid())
+  organizationId String
+  action         String
+  entity         String
+  entityId       String
+  metadata       Json?
+
+  organization Organization @relation(fields: [organizationId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([organizationId])
+}
