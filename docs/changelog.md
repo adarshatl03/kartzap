@@ -46,3 +46,16 @@
 ### 0.3.3 Login & Session Validation
 - Verified credentials login
 - Verified session endpoint
+
+## [0.4.0] - Authorization & RBAC
+
+### 0.4.1 Session & User Helpers
+- Added getSession helper
+- Added getCurrentUser helper
+
+### 0.4.2 Organization Context
+- Added getActiveOrganization helper
+
+### 0.4.3 Role-Based Access Control
+- Added requireAdmin helper
+- Added protected admin test API
