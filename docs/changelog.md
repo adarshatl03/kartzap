@@ -59,3 +59,16 @@
 ### 0.4.3 Role-Based Access Control
 - Added requireAdmin helper
 - Added protected admin test API
+
+## [0.5.0] - Product & Pricing Core
+
+### 0.5.1 Products
+- Admin-only product creation API
+- Organization-scoped product listing
+
+### 0.5.2 Prices
+- Admin-only price creation
+- Support for recurring and one-time prices
+
+### 0.5.3 Public Catalog
+- Public products API with prices and organization info

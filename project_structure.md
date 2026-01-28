@@ -18,6 +18,24 @@ kartzap
 │       │   └── window.svg
 │       ├── src
 │       │   ├── app
+│       │   │   ├── api
+│       │   │   │   ├── admin
+│       │   │   │   │   └── test
+│       │   │   │   │       └── route.ts
+│       │   │   │   ├── auth
+│       │   │   │   │   ├── [...nextauth]
+│       │   │   │   │   │   └── route.ts
+│       │   │   │   │   └── signup
+│       │   │   │   │       └── route.ts
+│       │   │   │   ├── prices
+│       │   │   │   │   └── route.ts
+│       │   │   │   ├── products
+│       │   │   │   │   ├── list
+│       │   │   │   │   │   └── route.ts
+│       │   │   │   │   └── route.ts
+│       │   │   │   └── public
+│       │   │   │       └── products
+│       │   │   │           └── route.ts
 │       │   │   ├── favicon.ico
 │       │   │   ├── globals.css
 │       │   │   ├── layout.tsx
@@ -26,6 +44,13 @@ kartzap
 │       │   ├── features
 │       │   ├── lib
 │       │   └── server
+│       │       ├── auth
+│       │       │   ├── config.ts
+│       │       │   ├── current-user.ts
+│       │       │   ├── organization.ts
+│       │       │   ├── require-admin.ts
+│       │       │   └── session.ts
+│       │       └── db.ts
 │       ├── .env
 │       ├── .gitignore
 │       ├── eslint.config.mjs
@@ -36,7 +61,8 @@ kartzap
 │       ├── postcss.config.mjs
 │       ├── prisma.config.ts
 │       ├── README.md
-│       └── tsconfig.json
+│       ├── tsconfig.json
+│       └── tsconfig.tsbuildinfo
 ├── docs
 │   └── changelog.md
 └── .gitignore
