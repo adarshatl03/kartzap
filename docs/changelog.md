@@ -30,3 +30,19 @@
 - Ran initial migration
 - Generated Prisma Client
 
+## [0.3.0] - Authentication & Identity
+
+### 0.3.1 Auth Core
+- Configured NextAuth with Credentials provider
+- Integrated Prisma adapter
+- Enabled JWT-based sessions
+- Added secure password hashing with bcrypt
+
+### 0.3.2 Signup & Tenant Bootstrap
+- Implemented signup API
+- Auto-create organization on signup
+- Assign creator as ADMIN via membership
+
+### 0.3.3 Login & Session Validation
+- Verified credentials login
+- Verified session endpoint
