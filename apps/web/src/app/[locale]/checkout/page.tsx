@@ -1,8 +1,10 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 export default function CheckoutPage() {
+  const t = useTranslations();
   const params = useSearchParams();
   const priceId = params.get("priceId");
 
@@ -19,11 +21,9 @@ export default function CheckoutPage() {
 
   return (
     <div>
-      <h1>Checkout</h1>
+      <h1>{t("CHECKOUT")}</h1>
 
-      <button onClick={startCheckout}>
-        Pay Now
-      </button>
+      <button onClick={startCheckout}>{t("PAY_NOW")}</button>
     </div>
   );
 }

@@ -11,7 +11,7 @@ export async function POST(req: Request) {
 
     if (!user) {
       return NextResponse.json(
-        { error: "Unauthorized" },
+        { error: "UNAUTHORIZED" },
         { status: 401 }
       );
     }
@@ -26,7 +26,7 @@ export async function POST(req: Request) {
 
     if (!price) {
       return NextResponse.json(
-        { error: "Price not found" },
+        { error: "INVALID_PRICE" },
         { status: 404 }
       );
     }
@@ -60,7 +60,7 @@ export async function POST(req: Request) {
   } catch (err) {
     console.error(err);
     return NextResponse.json(
-      { error: "Checkout failed" },
+      { error: "CHECKOUT_FAILED" },
       { status: 500 }
     );
   }

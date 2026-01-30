@@ -1,5 +1,38 @@
 {
-  "appName": "كارتزاب",
-  "signup": "إنشاء حساب",
-  "login": "تسجيل الدخول"
+  "SIGNUP": "إنشاء حساب",
+  "LOGIN": "تسجيل الدخول",
+  "EMAIL": "البريد الإلكتروني",
+  "PASSWORD": "كلمة المرور",
+  "ORGANIZATION": "المنظمة",
+  "LOADING": "جارٍ التحميل...",
+  "PRODUCTS": "المنتجات",
+  "BUY": "شراء",
+  "CHECKOUT": "الدفع",
+  "PAY_NOW": "ادفع الآن",
+  "LOGIN_FAILED": "فشل تسجيل الدخول",
+  "SIGNUP_FAILED": "فشل إنشاء الحساب",
+  "INVALID_INPUT": "إدخال غير صالح",
+  "INVALID_EMAIL": "بريد إلكتروني غير صالح",
+  "PASSWORD_TOO_SHORT": "كلمة المرور قصيرة جدًا",
+  "ERRORS": {
+    "INVALID_EMAIL": "بريد إلكتروني غير صالح",
+    "PASSWORD_SHORT": "كلمة المرور قصيرة جدًا",
+    "ORGANIZATION_REQUIRED": "اسم المنظمة مطلوب",
+    "MISSING_REQUIRED_FIELDS": "حقول مطلوبة مفقودة",
+    "EMAIL_ALREADY_EXISTS": "البريد الإلكتروني موجود بالفعل",
+    "ORGANIZATION_CREATION_FAILED": "فشل إنشاء المنظمة",
+    "INTERNAL_SERVER_ERROR": "خطأ داخلي في الخادم",
+    "UNAUTHORIZED": "غير مصرح",
+    "INVALID_PRICE": "سعر غير صالح",
+    "CHECKOUT_FAILED": "فشل الدفع",
+    "MISSING_FIELDS": "حقول مفقودة",
+    "FORBIDDEN": "ممنوع",
+    "ORGANIZATION_NOT_FOUND": "المنظمة غير موجودة",
+    "NAME_REQUIRED": "الاسم مطلوب",
+    "WEBHOOK_VERIFICATION_FAILED": "فشل التحقق من Webhook"
+  },
+  "META": {
+    "TITLE": "كارت زاب",
+    "DESCRIPTION": "تطبيق كارت زاب"
+  }
 }

@@ -11,7 +11,7 @@ export async function POST(req: Request) {
 
     if (!productId || !amount || !currency) {
       return NextResponse.json(
-        { error: "Missing fields" },
+        { error: "MISSING_FIELDS" },
         { status: 400 }
       );
     }
@@ -28,7 +28,7 @@ export async function POST(req: Request) {
     return NextResponse.json(price);
   } catch (err) {
     return NextResponse.json(
-      { error: "Forbidden" },
+      { error: "FORBIDDEN" },
       { status: 403 }
     );
   }

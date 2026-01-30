@@ -1,7 +1,21 @@
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
+import { getMessages, getTranslations } from "next-intl/server";
 import { Providers } from "@/components/providers";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "META" });
+
+  return {
+    title: t("TITLE"),
+    description: t("DESCRIPTION"),
+  };
+}
 
 export default async function LocaleLayout({
   children,
@@ -21,9 +35,7 @@ export default async function LocaleLayout({
   return (
     <NextIntlClientProvider messages={messages}>
       <Providers>
-        <div dir={locale === "ar" ? "rtl" : "ltr"}>
-          {children}
-        </div>
+        <div dir={locale === "ar" ? "rtl" : "ltr"}>{children}</div>
       </Providers>
     </NextIntlClientProvider>
   );

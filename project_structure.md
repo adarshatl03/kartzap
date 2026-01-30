@@ -4,6 +4,9 @@
 kartzap
 ├── apps
 │   └── web
+│       ├── messages
+│       │   ├── ar.json
+│       │   └── en.json
 │       ├── prisma
 │       │   ├── migrations
 │       │   │   ├── 20260128192609_init
@@ -18,14 +21,38 @@ kartzap
 │       │   └── window.svg
 │       ├── src
 │       │   ├── app
+│       │   │   ├── [locale]
+│       │   │   │   ├── checkout
+│       │   │   │   │   └── page.tsx
+│       │   │   │   ├── login
+│       │   │   │   │   └── page.tsx
+│       │   │   │   ├── signup
+│       │   │   │   │   └── page.tsx
+│       │   │   │   ├── layout.tsx
+│       │   │   │   └── page.tsx
 │       │   │   ├── api
 │       │   │   │   ├── admin
+│       │   │   │   │   ├── customers
+│       │   │   │   │   │   └── route.ts
+│       │   │   │   │   ├── orders
+│       │   │   │   │   │   └── route.ts
+│       │   │   │   │   ├── revenue
+│       │   │   │   │   │   └── route.ts
+│       │   │   │   │   ├── subscriptions
+│       │   │   │   │   │   └── route.ts
 │       │   │   │   │   └── test
 │       │   │   │   │       └── route.ts
 │       │   │   │   ├── auth
 │       │   │   │   │   ├── [...nextauth]
 │       │   │   │   │   │   └── route.ts
 │       │   │   │   │   └── signup
+│       │   │   │   │       └── route.ts
+│       │   │   │   ├── billing
+│       │   │   │   │   ├── cancel
+│       │   │   │   │   │   └── route.ts
+│       │   │   │   │   ├── change-plan
+│       │   │   │   │   │   └── route.ts
+│       │   │   │   │   └── subscription
 │       │   │   │   │       └── route.ts
 │       │   │   │   ├── checkout
 │       │   │   │   │   └── route.ts
@@ -38,24 +65,31 @@ kartzap
 │       │   │   │   ├── public
 │       │   │   │   │   └── products
 │       │   │   │   │       └── route.ts
+│       │   │   │   ├── subscriptions
+│       │   │   │   │   └── checkout
+│       │   │   │   │       └── route.ts
 │       │   │   │   └── webhooks
 │       │   │   │       └── stripe
 │       │   │   │           └── route.ts
+│       │   │   ├── error.tsx
 │       │   │   ├── favicon.ico
 │       │   │   ├── globals.css
 │       │   │   ├── layout.tsx
-│       │   │   └── page.tsx
+│       │   │   └── loading.tsx
 │       │   ├── components
+│       │   │   └── providers.tsx
 │       │   ├── features
 │       │   ├── lib
-│       │   └── server
-│       │       ├── auth
-│       │       │   ├── config.ts
-│       │       │   ├── current-user.ts
-│       │       │   ├── organization.ts
-│       │       │   ├── require-admin.ts
-│       │       │   └── session.ts
-│       │       └── db.ts
+│       │   ├── server
+│       │   │   ├── auth
+│       │   │   │   ├── config.ts
+│       │   │   │   ├── current-user.ts
+│       │   │   │   ├── organization.ts
+│       │   │   │   ├── require-admin.ts
+│       │   │   │   └── session.ts
+│       │   │   └── db.ts
+│       │   ├── i18n.ts
+│       │   └── proxy.ts
 │       ├── .env
 │       ├── .gitignore
 │       ├── eslint.config.mjs

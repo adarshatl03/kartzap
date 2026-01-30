@@ -12,7 +12,7 @@ export async function POST(req: Request) {
 
     if (!email || !password || !organizationName) {
       return NextResponse.json(
-        { error: "Missing required fields" },
+        { error: "MISSING_REQUIRED_FIELDS" },
         { status: 400 },
       );
     }
@@ -23,7 +23,7 @@ export async function POST(req: Request) {
 
     if (existing) {
       return NextResponse.json(
-        { error: "User already exists" },
+        { error: "EMAIL_ALREADY_EXISTS" },
         { status: 400 },
       );
     }
@@ -62,7 +62,7 @@ export async function POST(req: Request) {
     });
 
     if (!membership) {
-      throw new Error("Organization creation failed");
+      throw new Error("ORGANIZATION_CREATION_FAILED");
     }
 
     // create customer tied to org
@@ -82,7 +82,7 @@ export async function POST(req: Request) {
   } catch (err) {
     console.error(err);
     return NextResponse.json(
-      { error: "Internal server error" },
+      { error: "INTERNAL_SERVER_ERROR" },
       { status: 500 },
     );
   }

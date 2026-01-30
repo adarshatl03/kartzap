@@ -11,7 +11,7 @@ export async function POST(req: Request) {
 
     if (!user) {
       return NextResponse.json(
-        { error: "Unauthorized" },
+        { error: "UNAUTHORIZED" },
         { status: 401 }
       );
     }
@@ -26,7 +26,7 @@ export async function POST(req: Request) {
 
     if (!price || !price.interval) {
       return NextResponse.json(
-        { error: "Invalid price" },
+        { error: "INVALID_PRICE" },
         { status: 400 }
       );
     }
@@ -37,7 +37,7 @@ export async function POST(req: Request) {
 
     if (!customer || !customer.externalCustomerId) {
       return NextResponse.json(
-        { error: "Customer not found" },
+        { error: "CUSTOMER_NOT_FOUND" },
         { status: 404 }
       );
     }
@@ -72,7 +72,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ url: session.url });
   } catch (err) {
     return NextResponse.json(
-      { error: "Change plan failed" },
+      { error: "CHANGE_PLAN_FAILED" },
       { status: 500 }
     );
   }

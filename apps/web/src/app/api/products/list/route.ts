@@ -7,7 +7,7 @@ export async function GET() {
 
   if (!org) {
     return NextResponse.json(
-      { error: "Unauthorized" },
+      { error: "UNAUTHORIZED" },
       { status: 401 }
     );
   }

@@ -18,7 +18,7 @@ export async function POST(req: Request) {
     );
   } catch (err) {
     return NextResponse.json(
-      { error: "Webhook verification failed" },
+      { error: "WEBHOOK_VERIFICATION_FAILED" },
       { status: 400 },
     );
   }

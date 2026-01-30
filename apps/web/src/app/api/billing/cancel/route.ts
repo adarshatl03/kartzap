@@ -11,7 +11,7 @@ export async function POST() {
 
     if (!user) {
       return NextResponse.json(
-        { error: "Unauthorized" },
+        { error: "UNAUTHORIZED" },
         { status: 401 }
       );
     }
@@ -24,7 +24,7 @@ export async function POST() {
 
     if (!customer) {
       return NextResponse.json(
-        { error: "Customer not found" },
+        { error: "CUSTOMER_NOT_FOUND" },
         { status: 404 }
       );
     }
@@ -38,7 +38,7 @@ export async function POST() {
 
     if (!subscription || !subscription.externalSubscriptionId) {
       return NextResponse.json(
-        { error: "No active subscription" },
+        { error: "NO_ACTIVE_SUBSCRIPTION" },
         { status: 400 }
       );
     }
@@ -55,7 +55,7 @@ export async function POST() {
     return NextResponse.json({ success: true });
   } catch (err) {
     return NextResponse.json(
-      { error: "Cancel failed" },
+      { error: "CANCEL_FAILED" },
       { status: 500 }
     );
   }

@@ -11,7 +11,7 @@ export async function POST(req: Request) {
 
     if (!user) {
       return NextResponse.json(
-        { error: "Unauthorized" },
+        { error: "UNAUTHORIZED" },
         { status: 401 }
       );
     }
@@ -26,7 +26,7 @@ export async function POST(req: Request) {
 
     if (!price || !price.interval) {
       return NextResponse.json(
-        { error: "Invalid subscription price" },
+        { error: "INVALID_SUBSCRIPTION_PRICE" },
         { status: 400 }
       );
     }
@@ -39,7 +39,7 @@ export async function POST(req: Request) {
 
     if (!customer || !customer.externalCustomerId) {
       return NextResponse.json(
-        { error: "Stripe customer missing" },
+        { error: "STRIPE_CUSTOMER_MISSING" },
         { status: 400 }
       );
     }
@@ -75,7 +75,7 @@ export async function POST(req: Request) {
   } catch (err) {
     console.error(err);
     return NextResponse.json(
-      { error: "Subscription checkout failed" },
+      { error: "SUBSCRIPTION_CHECKOUT_FAILED" },
       { status: 500 }
     );
   }

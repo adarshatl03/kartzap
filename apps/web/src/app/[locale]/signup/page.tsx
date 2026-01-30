@@ -1,62 +1,67 @@
 "use client";
 
-import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
+
+const schema = z.object({
+  email: z.string().email(),
+  password: z.string().min(6),
+  organizationName: z.string().min(2),
+});
+
+type FormData = z.infer<typeof schema>;
 
 export default function SignupPage() {
   const t = useTranslations();
   const router = useRouter();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [org, setOrg] = useState("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<FormData>({
+    resolver: zodResolver(schema),
+  });
 
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-
+  async function onSubmit(data: FormData) {
     const res = await fetch("/api/auth/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        email,
-        password,
-        organizationName: org,
-      }),
+      body: JSON.stringify(data),
     });
 
     if (res.ok) {
       router.push("/login");
     } else {
-      alert("Signup failed");
+      alert(t("SIGNUP_FAILED"));
     }
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>{t("signup")}</h1>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <h1>{t("SIGNUP")}</h1>
+
+      <input placeholder={t("EMAIL")} {...register("email")} />
+      {errors.email && <p>{t("ERRORS.INVALID_EMAIL")}</p>}
 
       <input
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-
-      <input
-        placeholder="Password"
         type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
+        placeholder={t("PASSWORD")}
+        {...register("password")}
       />
+      {errors.password && <p>{t("ERRORS.PASSWORD_SHORT")}</p>}
 
       <input
-        placeholder="Organization"
-        value={org}
-        onChange={(e) => setOrg(e.target.value)}
+        placeholder={t("ORGANIZATION")}
+        {...register("organizationName")}
       />
+      {errors.organizationName && <p>{t("ERRORS.ORGANIZATION_REQUIRED")}</p>}
 
-      <button type="submit">
-        {t("signup")}
+      <button disabled={isSubmitting}>
+        {isSubmitting ? t("LOADING") : t("SIGNUP")}
       </button>
     </form>
   );

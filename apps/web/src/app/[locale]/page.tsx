@@ -1,7 +1,4 @@
-"use client";
-
-import { useEffect, useState } from "react";
-
+import { prisma } from "@/server/db";
 type Product = {
   id: string;
   name: string;
@@ -12,15 +9,15 @@ type Product = {
     interval?: string | null;
   }[];
 };
-
-export default function HomePage() {
-  const [products, setProducts] = useState<Product[]>([]);
-
-  useEffect(() => {
-    fetch("/api/public/products")
-      .then((res) => res.json())
-      .then(setProducts);
-  }, []);
+export const metadata = {
+  title: "Kartzap – Sell Anything, Anywhere",
+  description: "Multi-tenant eCommerce SaaS with subscriptions and payments",
+};
+export default async function HomePage() {
+  const products = await prisma.product.findMany({
+    where: { isActive: true },
+    include: { prices: true },
+  });
 
   return (
     <div>
@@ -34,10 +31,7 @@ export default function HomePage() {
             <div key={price.id}>
               {price.amount / 100} {price.currency}
               {price.interval && ` / ${price.interval}`}
-
-              <a href={`/checkout?priceId=${price.id}`}>
-                Buy
-              </a>
+              <a href={`/checkout?priceId=${price.id}`}>Buy</a>
             </div>
           ))}
         </div>

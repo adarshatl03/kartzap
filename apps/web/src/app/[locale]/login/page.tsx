@@ -1,52 +1,61 @@
 "use client";
 
-import { useState } from "react";
-import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
+
+const schema = z.object({
+  email: z.string().email(),
+  password: z.string().min(6),
+});
+
+type FormData = z.infer<typeof schema>;
 
 export default function LoginPage() {
   const t = useTranslations();
   const router = useRouter();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<FormData>({
+    resolver: zodResolver(schema),
+  });
 
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-
+  async function onSubmit(data: FormData) {
     const res = await signIn("credentials", {
-      email,
-      password,
+      email: data.email,
+      password: data.password,
       redirect: false,
     });
 
     if (res?.ok) {
       router.push("/");
     } else {
-      alert("Login failed");
+      alert(t("INVALID_INPUT"));
     }
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>{t("login")}</h1>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <h1>{t("LOGIN")}</h1>
+
+      <input placeholder={t("EMAIL")} {...register("email")} />
+      {errors.email && <p>{t("INVALID_EMAIL")}</p>}
 
       <input
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-
-      <input
-        placeholder="Password"
         type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
+        placeholder={t("PASSWORD")}
+        {...register("password")}
       />
+      {errors.password && <p>{t("PASSWORD_TOO_SHORT")}</p>}
 
-      <button type="submit">
-        {t("login")}
+      <button disabled={isSubmitting}>
+        {isSubmitting ? t("LOADING") : t("LOGIN")}
       </button>
     </form>
   );

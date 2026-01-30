@@ -11,7 +11,7 @@ export async function POST(req: Request) {
 
     if (!org) {
       return NextResponse.json(
-        { error: "Organization not found" },
+        { error: "ORGANIZATION_NOT_FOUND" },
         { status: 400 }
       );
     }
@@ -21,7 +21,7 @@ export async function POST(req: Request) {
 
     if (!name) {
       return NextResponse.json(
-        { error: "Name required" },
+        { error: "NAME_REQUIRED" },
         { status: 400 }
       );
     }
@@ -37,7 +37,7 @@ export async function POST(req: Request) {
     return NextResponse.json(product);
   } catch (err) {
     return NextResponse.json(
-      { error: "Forbidden" },
+      { error: "FORBIDDEN" },
       { status: 403 }
     );
   }
