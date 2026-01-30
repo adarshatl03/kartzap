@@ -183,3 +183,15 @@
 
 - Global loading UI
 - Global error boundary
+
+## [1.2.0] - Admin & Customer UI
+
+### 1.2.1 Admin
+- Product management
+- Price management
+- Orders list
+- Subscriptions list
+- Revenue page
+
+### 1.2.2 Customer
+- Billing portal page

@@ -22,6 +22,20 @@ kartzap
 │       ├── src
 │       │   ├── app
 │       │   │   ├── [locale]
+│       │   │   │   ├── admin
+│       │   │   │   │   ├── orders
+│       │   │   │   │   │   └── page.tsx
+│       │   │   │   │   ├── products
+│       │   │   │   │   │   ├── [id]
+│       │   │   │   │   │   │   └── page.tsx
+│       │   │   │   │   │   └── page.tsx
+│       │   │   │   │   ├── revenue
+│       │   │   │   │   │   └── page.tsx
+│       │   │   │   │   ├── subscriptions
+│       │   │   │   │   │   └── page.tsx
+│       │   │   │   │   └── page.tsx
+│       │   │   │   ├── billing
+│       │   │   │   │   └── page.tsx
 │       │   │   │   ├── checkout
 │       │   │   │   │   └── page.tsx
 │       │   │   │   ├── login
